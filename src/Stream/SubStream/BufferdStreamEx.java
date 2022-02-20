@@ -17,25 +17,28 @@ public class BufferdStreamEx {
         boolean useBuffer = true;
         if (useBuffer) {
 
+
+            millisecond = System.currentTimeMillis();
             int bufferReader;
 
             while ((bufferReader = bis.read()) != -1) {
                 bos.write(bufferReader);
             }
 
-            System.out.println("파일을 복사 소요시간 : " + millisecond);
+            millisecond = System.currentTimeMillis() - millisecond;
+            System.out.println("파일을 복사 소요시간 : " + ((float)millisecond/1000));
 
         } else {
 
             millisecond = System.currentTimeMillis();
-
             int bufferReader;
 
             while ((bufferReader = fis.read()) != -1) {
                 fos.write(bufferReader);
             }
 
-            System.out.println("파일을 복사 소요시간 : " + millisecond);
+            millisecond = System.currentTimeMillis() - millisecond;
+            System.out.println("파일을 복사 소요시간 : " + (millisecond)/1000);
         }
     }
 }
