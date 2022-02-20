@@ -37,6 +37,7 @@ public class BufferdStreamEx {
                 fos.write(bufferReader);
             }
 
+
             millisecond = System.currentTimeMillis() - millisecond;
             System.out.println("파일을 복사 소요시간 : " + (millisecond)/1000);
         }
