@@ -8,38 +8,56 @@ public class BufferdStreamEx {
 
         long millisecond = 0;
 
-        FileInputStream fis = new FileInputStream("testZip.zip");
-        FileOutputStream fos = new FileOutputStream("copyTestZip.zip");
+        FileInputStream fis = null;
+        FileOutputStream fos = null;
 
-        BufferedInputStream bis = new BufferedInputStream(fis);
-        BufferedOutputStream bos = new BufferedOutputStream(fos);
+        BufferedInputStream bis = null;
+        BufferedOutputStream bos = null;
 
-        boolean useBuffer = true;
-        if (useBuffer) {
+        try {
+
+            fis = new FileInputStream("testZip.zip");
+            fos = new FileOutputStream("copyTestZip.zip");
+
+            bis = new BufferedInputStream(fis);
+            bos = new BufferedOutputStream(fos);
+
+            boolean useBuffer = true;
+            if (useBuffer) {
 
 
-            millisecond = System.currentTimeMillis();
-            int bufferReader;
+                millisecond = System.currentTimeMillis();
+                int bufferReader;
 
-            while ((bufferReader = bis.read()) != -1) {
-                bos.write(bufferReader);
+                while ((bufferReader = bis.read()) != -1) {
+                    bos.write(bufferReader);
+                }
+
+                millisecond = System.currentTimeMillis() - millisecond;
+                System.out.println("파일을 복사 소요시간 : " + ((float) millisecond / 1000));
+
+            } else {
+
+                millisecond = System.currentTimeMillis();
+                int bufferReader;
+
+                while ((bufferReader = fis.read()) != -1) {
+                    fos.write(bufferReader);
+                }
+
+
+                millisecond = System.currentTimeMillis() - millisecond;
+                System.out.println("파일을 복사 소요시간 : " + (millisecond) / 1000);
             }
-
-            millisecond = System.currentTimeMillis() - millisecond;
-            System.out.println("파일을 복사 소요시간 : " + ((float)millisecond/1000));
-
-        } else {
-
-            millisecond = System.currentTimeMillis();
-            int bufferReader;
-
-            while ((bufferReader = fis.read()) != -1) {
-                fos.write(bufferReader);
-            }
-
-
-            millisecond = System.currentTimeMillis() - millisecond;
-            System.out.println("파일을 복사 소요시간 : " + (millisecond)/1000);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            fis.close();
+            bis.close();
+            fos.flush();
+            bos.flush();
+            fos.close();
+            bos.close();
         }
     }
 }
