@@ -82,7 +82,7 @@ public class HttpURLFileDownload {
                 System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
                 System.out.println(":::::::: FILE NAME : '" + fileName + "'\n:::::::: PATH : '" + downloadFile + "' \n:::::::: STATUS : File Download Complete");
 
-                //fileCopy(downloadFile);
+                fileCopy(downloadFile);
 
             } else {
                 System.err.println(":::::::: downloadFile ( File instance ) is null");
@@ -93,90 +93,90 @@ public class HttpURLFileDownload {
     }
 
 
-//    public void fileCopy(File originalFile) throws IOException {
-//
-//        if (originalFile != null) {
-//            String originalFileName = originalFile.getPath();
-//            String copyFileName = "";
-//
-//            File copyFile = null;
-//
-//            if (originalFileName.contains(".")) {
-//                String oriFileNameExtension = originalFileName.substring(originalFileName.lastIndexOf(".") + 1, originalFileName.length());
-//                copyFileName = originalFileName.substring(0, originalFileName.lastIndexOf(".")) + "copy" + "." + oriFileNameExtension;
-//            } else {
-//                copyFileName = originalFileName + "copy";
-//            }
-//
-//            copyFile = new File(copyFileName);
-//
-//            //Files.copy(originalFile.toPath(),copyFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-//
-//            FileInputStream fileInputStream = new FileInputStream(originalFile);
-//            FileOutputStream fileOutputStream = new FileOutputStream(copyFile);
-//
-//            int bytesRead = -1;
-//            byte[] buffer = new byte[4096];
-//            while ((bytesRead = fileInputStream.read(buffer)) != -1) {
-//                fileOutputStream.write(buffer, 0, bytesRead);
-//            }
-//
-//            fileOutputStream.flush();
-//            fileOutputStream.close();
-//            fileInputStream.close();
-//
-//
-//            System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
-//            System.out.println(":::::::: FILE NAME : '" + copyFile.getName() + "'\n:::::::: PATH : '" + copyFile + "' \n:::::::: STATUS : File Copy Complete");
-//            System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
-//
-//            fileDelete(copyFile, true);
-//
-//        } else {
-//            System.err.println(":::::::: Original File ( File, not a Dir ) is null");
-//        }
-//    }
-//
-//    public void fileDelete(File deleteFile, Boolean dirDeleteOption) {
-//        if (!deleteFile.isDirectory()) {
-//            deleteFile.delete();
-//            System.out.println(":::::::: FILE NAME : '" + deleteFile.getName() + "'\n:::::::: PATH : '" + deleteFile + "' \n:::::::: STATUS : File Delete Complete");
-//            System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
-//
-//        } else {
-//            System.out.println(":::::::: FILE NAME : '" + deleteFile.getName() + "'\n:::::::: PATH : '" + deleteFile + "' \n:::::::: STATUS : Can Not Delete File, is a Dir");
-//            System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
-//
-//            // 디렉토리 삭제 옵션이 켜져 있는 경우
-//            if (dirDeleteOption) {
-//                File[] deleteFolderList = deleteFile.listFiles();
-//                // 디렉토리 안에 하위파일들이 있는지 체크
-//
-//                if (deleteFolderList != null) {
-//                    // 디렉토리 안에 하위파일들이 존재시
-//                    for (int i = 0; i < deleteFolderList.length; i++) {
-//
-//                        if (deleteFolderList[i].isFile()) {
-//                            deleteFolderList[i].delete();
-//                        } else {
-//                            fileDelete(new File(deleteFolderList[i].getPath()), true);
-//                            //재귀함수 형식으로 디렉토리 속, 디렉토리를 삭제
-//                        }
-//                        deleteFolderList[i].delete();
-//                        deleteFile.delete();
-//                    }
-//                    System.out.println(":::::::: FILE NAME : '" + deleteFile.getName() + "'\n:::::::: PATH : '" + deleteFile + "' \n:::::::: STATUS : Dir Delete Complete");
-//                    System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
-//
-//                }
-//                deleteFile.delete();
-//                System.out.println(":::::::: FILE NAME : '" + deleteFile.getName() + "'\n:::::::: PATH : '" + deleteFile + "' \n:::::::: STATUS : File Delete Complete");
-//                System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
-//
-//
-//
-//
-//            }
-//        }
-//    }
+    public void fileCopy(File originalFile) throws IOException {
+
+        if (originalFile != null) {
+            String originalFileName = originalFile.getPath();
+            String copyFileName = "";
+
+            File copyFile = null;
+
+            if (originalFileName.contains(".")) {
+                String oriFileNameExtension = originalFileName.substring(originalFileName.lastIndexOf(".") + 1, originalFileName.length());
+                copyFileName = originalFileName.substring(0, originalFileName.lastIndexOf(".")) + "copy" + "." + oriFileNameExtension;
+            } else {
+                copyFileName = originalFileName + "copy";
+            }
+
+            copyFile = new File(copyFileName);
+
+            //Files.copy(originalFile.toPath(),copyFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+            FileInputStream fileInputStream = new FileInputStream(originalFile);
+            FileOutputStream fileOutputStream = new FileOutputStream(copyFile);
+
+            int bytesRead = -1;
+            byte[] buffer = new byte[4096];
+            while ((bytesRead = fileInputStream.read(buffer)) != -1) {
+                fileOutputStream.write(buffer, 0, bytesRead);
+            }
+
+            fileOutputStream.flush();
+            fileOutputStream.close();
+            fileInputStream.close();
+
+
+            System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+            System.out.println(":::::::: FILE NAME : '" + copyFile.getName() + "'\n:::::::: PATH : '" + copyFile + "' \n:::::::: STATUS : File Copy Complete");
+            System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+
+            fileDelete(copyFile, true);
+
+        } else {
+            System.err.println(":::::::: Original File ( File, not a Dir ) is null");
+        }
+    }
+
+    public void fileDelete(File deleteFile, Boolean dirDeleteOption) {
+        if (!deleteFile.isDirectory()) {
+            deleteFile.delete();
+            System.out.println(":::::::: FILE NAME : '" + deleteFile.getName() + "'\n:::::::: PATH : '" + deleteFile + "' \n:::::::: STATUS : File Delete Complete");
+            System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+
+        } else {
+            System.out.println(":::::::: FILE NAME : '" + deleteFile.getName() + "'\n:::::::: PATH : '" + deleteFile + "' \n:::::::: STATUS : Can Not Delete File, is a Dir");
+            System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+
+            // 디렉토리 삭제 옵션이 켜져 있는 경우
+            if (dirDeleteOption) {
+                File[] deleteFolderList = deleteFile.listFiles();
+                // 디렉토리 안에 하위파일들이 있는지 체크
+
+                if (deleteFolderList != null) {
+                    // 디렉토리 안에 하위파일들이 존재시
+                    for (int i = 0; i < deleteFolderList.length; i++) {
+
+                        if (deleteFolderList[i].isFile()) {
+                            deleteFolderList[i].delete();
+                        } else {
+                            fileDelete(new File(deleteFolderList[i].getPath()), true);
+                            //재귀함수 형식으로 디렉토리 속, 디렉토리를 삭제
+                        }
+                        deleteFolderList[i].delete();
+                        deleteFile.delete();
+                    }
+                    System.out.println(":::::::: FILE NAME : '" + deleteFile.getName() + "'\n:::::::: PATH : '" + deleteFile + "' \n:::::::: STATUS : Dir Delete Complete");
+                    System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+
+                }
+                deleteFile.delete();
+                System.out.println(":::::::: FILE NAME : '" + deleteFile.getName() + "'\n:::::::: PATH : '" + deleteFile + "' \n:::::::: STATUS : File Delete Complete");
+                System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+
+
+
+
+            }
+        }
+    }
 }
