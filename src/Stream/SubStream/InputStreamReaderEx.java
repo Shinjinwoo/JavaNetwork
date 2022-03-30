@@ -6,20 +6,13 @@ public class InputStreamReaderEx {
     public static void main(String[] args) throws IOException {
 
 
-        InputStreamReader isr = null;
+        InputStreamReader isr = new InputStreamReader(new FileInputStream("reader.txt"));
 
-        try {
-            isr = new InputStreamReader(new FileInputStream("reader.txt"));
-            int bufferReader;
+        int bufferReader;
 
 
-            while ((bufferReader = isr.read()) != -1) {
-                System.out.println((char) bufferReader);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            isr.close();
+        while ((bufferReader = isr.read())!=-1) {
+            System.out.println((char)bufferReader);
         }
     }
 }

@@ -9,8 +9,9 @@ public class FileOutputStreamEx {
     public static void main(String[] args) throws IOException {
 
         FileOutputStream fos = null;
+
         try {
-            fos = new FileOutputStream("output2.txt");
+            fos  = new FileOutputStream("output2.txt");
             byte[] buffer = new byte[26];
             byte data = 65; // 대문자 'A'의 아스키코드 값
 
